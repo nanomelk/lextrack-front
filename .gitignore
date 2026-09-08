@@ -5,7 +5,9 @@
 !package.json
 !package-lock.json
 !tsconfig.json
+!vercel.json
 credentials.json
+
 *.pem
 *.key
 *.p12
