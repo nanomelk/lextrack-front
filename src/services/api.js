@@ -4,7 +4,12 @@
  */
 import axios from 'axios';
 
-const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+const isProd = import.meta.env.PROD;
+const DEFAULT_URL = isProd
+  ? 'https://lextrack-back-9ew1.onrender.com'
+  : 'http://localhost:8000';
+
+const BASE_URL = import.meta.env.VITE_API_URL || DEFAULT_URL;
 
 const apiClient = axios.create({
   baseURL: BASE_URL,
