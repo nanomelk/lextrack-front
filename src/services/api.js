@@ -7,7 +7,7 @@ import axios from 'axios';
 const isProd = import.meta.env.PROD;
 const DEFAULT_URL = isProd
   ? 'https://lextrack-back-9ew1.onrender.com'
-  : 'http://localhost:8000';
+  : ''; // En dev, usar URL relativa para que el proxy de Vite maneje el routing
 
 const BASE_URL = import.meta.env.VITE_API_URL || DEFAULT_URL;
 
@@ -64,4 +64,18 @@ export const crearIngesta = async (ingesta) => {
   return data;
 };
 
+// ---------------------------------------------------------------------------
+// Chats (n8n + MongoDB)
+// ---------------------------------------------------------------------------
+export const getChats = async () => {
+  const { data } = await apiClient.get('/api/chats');
+  return data; // { total, chats: ChatSessionSummary[] }
+};
+
+export const getChatSession = async (sessionId) => {
+  const { data } = await apiClient.get(`/api/chats/${encodeURIComponent(sessionId)}`);
+  return data; // { sessionId, total, messages: ChatMessage[] }
+};
+
 export default apiClient;
+
